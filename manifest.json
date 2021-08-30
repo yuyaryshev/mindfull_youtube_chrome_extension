@@ -1,22 +1,29 @@
 {
-    "name": "Mindfull Youtube",
-    "description": "Removes some elements from youtube so you'll have more control over yourself and won't stay the whole day on youtube.",
-    "version": "1.0",
-    "permissions": [
-        "tabs","<all_urls>"
-    ],
-    "browser_action": {
-        "default_icon": "icon.png"
-    },
-    "content_scripts": [
-        {
-        "matches": [
-            "http://www.youtube.com/*",
-            "https://www.youtube.com//*"
-            ],
-        "js": ["content.js"],
-        "run_at": "document_end"
-        }
-    ], 
-    "manifest_version": 2
+  "name": "Mindfull Youtube",
+  "description": "Removes some elements from youtube so you'll have more control over yourself and won't stay the whole day on youtube.",
+  "action": {},
+  "manifest_version": 3,
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }

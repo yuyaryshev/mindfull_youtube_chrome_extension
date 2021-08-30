@@ -20,3 +20,5 @@ function setNextVideosVisibility(new_nextVideosVisible) {
 }
 setNextVideosVisibility(false);
 setInterval(setNextVideosVisibility, 300);
+
+console.log(`mindfull_youtube_chrome_extension - content.js started!`)
