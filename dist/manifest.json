@@ -1,8 +1,9 @@
 {
+  "name": "Mindfull Youtube",
+  "description": "Removes some elements from youtube so you'll have more control over yourself and won't stay the whole day on youtube.",
+  "action": {},
   "manifest_version": 2,
-  "name": "reflect. - a mindful website blocker",
-  "description": "a website blocker that asks users to reflect on their usage.",
-  "version": "1.4.0",
+  "version": "1.0",
   "options_page": "res/pages/options.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "background": {
@@ -20,9 +21,15 @@
     "default_title": "open reflect. options"
   },
   "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting",
     "storage",
     "<all_urls>",
     "contextMenus"
+  ],
+  "host_permissions": [
+    "*://*/*"
   ],
   "content_scripts": [
     {
@@ -32,6 +39,9 @@
       "run_at": "document_start"
     }
   ],
+  "DISABLED_background": {
+    "service_worker": "background.js"
+  },
   "commands": {
     "toggle-blocker": {
       "suggested_key": "Ctrl+Shift+O",
