@@ -13,9 +13,9 @@ specifiers:
   husky: ^4.2.5
   nodemon: ^2.0.4
   parcel-bundler: ^1.7.1
-  prettier: ^2.0.5
+  prettier: ^2.5.1
   pretty-quick: ^2.0.1
-  typescript: ^3.9.10
+  typescript: ^4.7.4
 
 dependencies:
   '@types/chrome': 0.0.92
@@ -34,7 +34,7 @@ devDependencies:
   parcel-bundler: 1.12.5
   prettier: 2.5.1
   pretty-quick: 2.0.2_prettier@2.5.1
-  typescript: 3.9.10
+  typescript: 4.7.4
 
 packages:
 
@@ -6741,8 +6741,8 @@ packages:
     resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=}
     dev: true
 
-  /typescript/3.9.10:
-    resolution: {integrity: sha512-w6fIxVE/H1PkLKcCPsFqKE7Kv7QUwhU8qQY2MueZXWx5cPZdwFupLgKK3vntcK98BtNHZtAF4LA/yl2a7k8R6Q==}
+  /typescript/4.7.4:
+    resolution: {integrity: sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

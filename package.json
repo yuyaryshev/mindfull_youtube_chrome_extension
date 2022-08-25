@@ -12,7 +12,7 @@
     "scripts": {
         "copy": "cp build/*.js dist/src/",
         "build": "tsc && npm run copy && npm run esbuild",
-        "esbuild": "esbuild build/background.js build/content.js build/popup.js build/options.js --sourcemap --bundle --outdir=dist/src",
+        "esbuild": "esbuild build/background.js build/content.js build/example_for_reference.js --sourcemap --bundle --outdir=dist/src",
         "watch": "nodemon -e ts -x \"npm run build\"",
         "clean": "rm dist/src/*"
     },
@@ -25,9 +25,9 @@
         "husky": "^4.2.5",
         "nodemon": "^2.0.4",
         "parcel-bundler": "^1.7.1",
-        "prettier": "^2.0.5",
+        "prettier": "^2.5.1",
         "pretty-quick": "^2.0.1",
-        "typescript": "^3.9.10"
+        "typescript": "^4.7.4"
     },
     "husky": {
         "hooks": {
