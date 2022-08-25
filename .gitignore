@@ -1,0 +1,8 @@
+.DS_Store
+.cache
+build
+node_modules
+web-ext-artifacts
+.idea
+.vscode
+/dist
