@@ -1,0 +1,42 @@
+Идеи по развитию mindfull youtube
+- Возможность просмотра Shorts, но только одного по ссылке
+	reel-video-in-sequence style-scope ytd-shorts
+	id > 0
+- Записывать причину почему хочу что-то открыть
+- Давать свои собственные ответы на это.
+- Ограничение по количеству просмотренных видео
+	- Заранее выбираю видео, затем - только их могу просмотреть.
+- Поддержать Firefox
+
+
+- Ограничение Lichess по количеству игр и/или по количеству побед. Скажем игра до одной победы
+
+
+Make a css selector inside the following javascript script.
+I need selector which have all these classes "reel-video-in-sequence style-scope ytd-shorts" and also have id attribute greater than 0 in html tag.
+
+const selector = // ChatGPT add selector here
+const myElements = document.querySelector(selector);
+
+	reel-video-in-sequence style-scope ytd-shorts
+	id > 0
+
+	
+dom-repeat class="style-scope ytd-shorts"
+
+
+
+function setElementVisibility(cssSelectorOrElement, visible) {
+        const element =
+            typeof cssSelectorOrElement === "string" ? document.querySelector(cssSelectorOrElement) : cssSelectorOrElement;
+        if (element) {
+            element.hidden = !visible;
+        }
+    }
+setElementVisibility('.reel-video-in-sequence.style-scope.ytd-shorts[id^="greaterThan0"]', false)
+
+
+document.querySelector('.reel-video-in-sequence.style-scope.ytd-shorts[id^="greaterThan0"]').delete()
+
+document.querySelectorAll('.reel-video-in-sequence .style-scope .ytd-shorts').forEach(i=>i.style.display = 'none');
+document.querySelectorAll('.reel-video-in-sequence .style-scope .ytd-shorts').forEach(i=>i.remove());
