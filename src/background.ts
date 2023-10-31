@@ -2,11 +2,11 @@
 chrome.runtime.onInstalled.addListener((details) => {
   // on first time install
   if (details.reason === 'install') {
-    chrome.tabs.create({
-      // redir to onboarding url
-      url: 'http://getreflect.app/onboarding',
-      active: true,
-    })
+    // chrome.tabs.create({
+    //   // redir to onboarding url
+    //   url: 'http://getreflect.app/onboarding',
+    //   active: true,
+    // })
   }
 
   // on version update
@@ -14,11 +14,11 @@ chrome.runtime.onInstalled.addListener((details) => {
   const thisVersion: string = chrome.runtime.getManifest().version
   if (details.reason === 'update') {
     if (prevVersion != thisVersion) {
-      chrome.tabs.create({
-        // redir to latest release patch notes
-        url: 'http://getreflect.app/latest',
-        active: true,
-      })
+      // chrome.tabs.create({
+      //   // redir to latest release patch notes
+      //   url: 'http://getreflect.app/latest',
+      //   active: true,
+      // })
 
       console.log(`Updated from ${prevVersion} to ${thisVersion}!`)
     }
