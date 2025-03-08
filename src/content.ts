@@ -85,6 +85,20 @@ function yHide(a: any, opts: YHideOpts = {}) {
 
 let consoleLogsLeft = 50;
 
+function switchYoutubeMusicToAudio(): void {
+    // Find the <ytmusic-player> element in the DOM
+    const playerElement = document.querySelector<HTMLElement>("ytmusic-player");
+
+    if (playerElement) {
+        // Check if the element has the expected ID and playback-mode attribute
+        if (playerElement.id === "player" && playerElement.getAttribute("playback-mode") === "OMV_PREFERRED") {
+            // Change the playback-mode attribute to ATV_PREFERRED
+            playerElement.setAttribute("playback-mode", "ATV_PREFERRED");
+            console.log("Playback mode switched to ATV_PREFERRED.");
+        }
+    }
+}
+
 function hideEvilElements() {
     const isOnMainPage = document.location.href.endsWith(".com/");
     function setElementVisibility(cssSelectorOrElement: string | Element | null, visible: boolean) {
@@ -136,7 +150,13 @@ function hideEvilElements() {
         ["Библиотека"]: visibleElements.other,
     };
 
-    if (!document.location.href.includes("youtube.com") || document.location.href.includes("music.youtube.com")) {
+    if (!document.location.href.includes("youtube.com")) {
+        return;
+    }
+
+    switchYoutubeMusicToAudio();
+
+    if (document.location.href.includes("music.youtube.com")) {
         return;
     }
 

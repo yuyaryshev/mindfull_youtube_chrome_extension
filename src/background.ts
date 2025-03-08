@@ -31,7 +31,7 @@ chrome.runtime.onInstalled.addListener((details) => {
 // On Chrome startup, setup extension icons
 chrome.runtime.onStartup.addListener(async () => {
     let icon: string = "res/icon.png";
-    chrome.browserAction.setIcon({ path: { "16": icon } });
+    chrome.browserAction?.setIcon({ path: { "16": icon } });
 });
 
 // reloads tab that is currently in focus
