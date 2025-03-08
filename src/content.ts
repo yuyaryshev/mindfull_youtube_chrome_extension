@@ -39,7 +39,54 @@ function yRemove(a: any, opts: YRemoveOpts = {}) {
     return { itemsLeft };
 }
 
+interface YHideOpts {
+    keepFirst?: number;
+    show?: boolean;
+}
+
+function yHideElem(a: any, visible: boolean) {
+    const n = visible ? "block" : "none";
+    const o = a.style.display;
+    if (o !== n) {
+        a.style.display = n;
+    }
+}
+
+function yHide(a: any, opts: YHideOpts = {}) {
+    if (typeof a === "string") {
+        a = document.querySelectorAll(a);
+    }
+
+    let itemsLeft = 0;
+    if (!a) {
+        return;
+    }
+
+    if (a.forEach) {
+        // console.log("CURRENT_DEBUG0001", { a });
+        let keepFirst = opts.keepFirst || 0;
+        for (let elem of a) {
+            if (keepFirst-- > 0) {
+                itemsLeft++;
+                // console.log("CURRENT_DEBUG0002", { keepFirst, a, itemsLeft, elem, cond: elem.constructor.name });
+                continue;
+            }
+            if (elem.style) {
+                // console.log("CURRENT_DEBUG0003", { keepFirst, a, itemsLeft, elem, cond: elem.constructor.name });
+                yHideElem(elem, opts?.show);
+            }
+        }
+    } else if (a.style) {
+        yHideElem(a, opts?.show);
+    }
+
+    return { itemsLeft };
+}
+
+let consoleLogsLeft = 50;
+
 function hideEvilElements() {
+    const isOnMainPage = document.location.href.endsWith(".com/");
     function setElementVisibility(cssSelectorOrElement: string | Element | null, visible: boolean) {
         const element: Element | null =
             typeof cssSelectorOrElement === "string" ? document.querySelector(cssSelectorOrElement) : cssSelectorOrElement;
@@ -74,10 +121,6 @@ function hideEvilElements() {
         // '[Title="Ваши видео"]':visibleElements.shortsAll,
     };
 
-    const forbiddenTabs = {
-        ["Главная"]: visibleElements.mainPageVideos,
-    };
-
     const forbiddenSidebarItems = {
         ["Ваши видео"]: visibleElements.yourVideos,
         ["Навигатор"]: visibleElements.navigationPage,
@@ -108,10 +151,6 @@ function hideEvilElements() {
 
     let contentVisible = true;
 
-    if (selectedTabName === "") {
-        contentVisible = false;
-    }
-
     for (const forbiddenUrl in forbiddenUrls) {
         const doHide = !forbiddenUrls[forbiddenUrl];
         if (doHide && document.location.href.includes(forbiddenUrl) && document.body) {
@@ -119,13 +158,8 @@ function hideEvilElements() {
         }
     }
 
-    if (forbiddenTabs.hasOwnProperty(selectedTabName) && !forbiddenTabs[selectedTabName]) {
+    if (isOnMainPage && !visibleElements.mainPageVideos) {
         contentVisible = false;
-    }
-    setContentVisibility(contentVisible);
-
-    if (!contentVisible) {
-        return;
     }
 
     let allSidebarItems = document.querySelectorAll("ytd-guide-entry-renderer") as any;
@@ -154,14 +188,19 @@ function hideEvilElements() {
         }
     }
 
+    let nextVideosR = false;
     if (!visibleElements.nextVideos || !visibleElements.shortsAll) {
         yRemove("ytd-reel-video-renderer", { keepFirst: !visibleElements.shortsAll ? 0 : 1 });
+        nextVideosR = true;
     }
 
-    if (document.location.href.endsWith(".com/") && !visibleElements.mainPageVideos) {
-        yRemove("#contents");
+    let mainPageVideosR = false;
+    if (!visibleElements.mainPageVideos) {
+        yHide("#contents", { show: !isOnMainPage });
+        mainPageVideosR = true;
     }
 
+    let nextCommentsR = false;
     if (!visibleElements.nextComments) {
         const keepFirst = 3;
         let { itemsLeft } = yRemove("ytd-comment-thread-renderer", { keepFirst });
@@ -169,5 +208,12 @@ function hideEvilElements() {
             yRemove("#more-replies");
             yRemove("ytd-continuation-item-renderer");
         }
+        nextCommentsR = true;
     }
+
+    if (consoleLogsLeft-- > 0) {
+        console.log("hideEvilElements", { isOnMainPage, contentVisible, nextVideosR, mainPageVideosR, nextCommentsR });
+    }
+
+    setContentVisibility(contentVisible);
 }

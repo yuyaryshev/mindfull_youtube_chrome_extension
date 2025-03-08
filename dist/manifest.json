@@ -1,54 +1,61 @@
 {
   "name": "Mindfull Youtube",
-  "description": "Removes some elements from youtube so you'll have more control over yourself and won't stay the whole day on youtube.",
-  "action": {},
-  "manifest_version": 2,
+  "description": "Removes some elements from YouTube so you'll have more control over yourself and won't stay the whole day on YouTube.",
+  "manifest_version": 3,
   "version": "1.0",
+  
   "options_page": "res/pages/options.html",
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  
   "background": {
-    "scripts": ["src/background.js"],
-  	"persistent": true
+    "service_worker": "src/background.js"
   },
+
   "icons": {
     "16": "res/icon.png",
     "48": "res/icon.png",
     "128": "res/icon.png"
   },
-  "browser_action": {
+
+  "action": {
     "default_icon": "res/icon.png",
     "default_popup": "res/pages/popup.html",
-    "default_title": "open reflect. options"
+    "default_title": "Open Reflect Options"
   },
+
   "permissions": [
     "tabs",
     "activeTab",
     "scripting",
     "storage",
-    "<all_urls>",
     "contextMenus"
   ],
+
   "host_permissions": [
     "*://*/*"
   ],
+
   "content_scripts": [
     {
-      "matches": [ "*://*/*" ],
+      "matches": ["*://*/*"],
       "js": ["jquery-3.4.1.min.js", "jquery-ui.min.js", "src/content.js"],
       "css": ["res/fonts.css", "res/main.css"],
       "run_at": "document_start"
     }
   ],
-  "DISABLED_background": {
-    "service_worker": "background.js"
-  },
+
   "commands": {
     "toggle-blocker": {
-      "suggested_key": "Ctrl+Shift+O",
+      "suggested_key": {
+        "default": "Ctrl+Shift+O"
+      },
       "description": "Toggle reflect on/off"
     }
   },
+
   "web_accessible_resources": [
-    "res/*"
+    {
+      "resources": ["res/*"],
+      "matches": ["*://*/*"]
+    }
   ]
 }
