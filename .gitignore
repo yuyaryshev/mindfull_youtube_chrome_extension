@@ -6,3 +6,5 @@ web-ext-artifacts
 .idea
 .vscode
 /dist/src
+dist.crx
+dist.pem

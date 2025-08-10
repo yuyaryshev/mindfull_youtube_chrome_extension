@@ -13,7 +13,7 @@
         "copy": "cp build/*.js dist/src/",
         "build": "tsc && npm run copy && npm run esbuild",
         "esbuild": "esbuild build/background.js build/content.js build/example_for_reference.js --sourcemap --bundle --outdir=dist/src",
-        "watch": "nodemon -e ts -x \"npm run build\"",
+        "watch": "nodemon -e ts -x \"npm run build || exit 1\"",
         "clean": "rm dist/src/*"
     },
     "devDependencies": {
